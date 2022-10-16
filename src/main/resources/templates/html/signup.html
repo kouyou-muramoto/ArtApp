@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>ユーザー登録</title>
+    </head>
+    <body>
+        <div>
+
+            <form th:action="@{/registration}" th:object="${userRegistrationForm}" autocomplete="off" method="post">
+
+                <h1>ユーザー登録</h1>
+
+               
+                    <label for="name">ユーザ名</label><br/>
+                    <input id="name" type="name" name="name" th:field="*{name}" autofocus="autofocus" value="" placeholder="ユーザ名を入力してください"/><br/>
+                    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div><br/>
+
+                    <label for="email">E-mail</label><br/>
+                    <input id="email" type="email" name="email" th:field="*{email}" value="" placeholder="E-mailを入力してください"/><br/>
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div><br/>
+
+                    <label for="loginId">login_id</label><br/>
+                    <input id="loginId" type="loginId" name="loginId" th:field="*{loginId}" value="" placeholder="ログインIDを入力してください"/><br/>
+                    <div th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></div><br/>
+
+                    <label for="password">パスワード</label><br/>
+                    <input id="password" type="password" name="password" th:field="*{password}" value="" placeholder="パスワードを入力してください"/><br/>
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div><br/>
+
+                    <label for="passwordConfirm">パスワード</label><br/>
+                    <input id="passwordConfirm" type="password" name="passwordConfirm" th:field="*{passwordConfirm}" value="" placeholder="上記と同じパスワード入力してください"/><br/>
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div><br/>
+                    
+                    <input type="submit" value="新規登録"/>
+            </form>
+            <script>
+                var form = document.forms[0];
+                form.onsubmit = function() {
+                  // エラーメッセージをクリアする
+                  form.password.setCustomValidity("");
+                  // パスワードの一致確認
+                  if (form.password.value != form.password_confirm.value) {
+                    // 一致していなかったら、エラーメッセージを表示する
+                    form.password.setCustomValidity("パスワードと確認用パスワードが一致しません");
+                  }
+                };
+                // 入力値チェックエラーが発生したときの処理
+                form.addEventListener("invalid", function() {
+                  document.getElementById("errorMessage").innerHTML = "入力値にエラーがあります";
+                }, false);
+              </script>
+        </div>
+    </body>
+</html>
+</html>
