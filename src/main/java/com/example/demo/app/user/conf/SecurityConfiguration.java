@@ -59,7 +59,7 @@ public class SecurityConfiguration {
 	 	 .authenticated()
 	 );
 
-	 return http.build(); 
+	 return http.build();
 	 }
 }
 
